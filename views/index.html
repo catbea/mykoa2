@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title%>
+    </title>
+</head>
+
+<body>
+    <h1>
+        <%= title%>
+    </h1>
+    <section>
+        <p>正文的一些内容我是主页</p>
+        <div id="content">
+
+        </div>
+        <div id="btn">我要添加一个用户</div>
+    </section>
+    <script>
+        var xhr = null;
+        function ajax(method, url, data, types) { //封装一个ajax方法
+            // var text;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            } else {
+                alert('你的浏览器不支持ajax');
+                return false;
+            }
+
+            xhr.onerror = function (err) {
+                alert("some err have hapened:", err);
+            }
+            xhr.open(method, url, true);
+            if (method == "post") {
+                xhr.setRequestHeader("Content-type", types);
+                // xhr.setRequestHeader("Conent-Type",'application/json'"application/x-www-form-urlencoded")
+            }
+            try {
+                setTimeout(() => {
+                    xhr.send(data);
+                }, 0);
+            } catch (err) {
+                alert("some error have hapened in font:", err);
+            }
+            return xhr;
+        }
+        ajax('get','/users/all',{},"application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState==4&&xhr.status>=200&&xhr.status<300){
+                let text =xhr.responseText; //服务器返回的对象
+                console.log(text);
+                document.getElementById("content").innerHTML = text;
+            }
+        }   
+
+        document.getElementById("btn").onclick = function(){
+            ajax('post','/users/userRegister',{},"application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState==4&&xhr.status>=200&&xhr.status<300){
+                    let text =xhr.responseText; //服务器返回的对象
+                    console.log(text);
+                    document.getElementById("content").innerHTML = text;
+                }
+            }  
+        };
+
+    </script>
+</body>
+
+</html>
