@@ -1,7 +1,7 @@
 <template>
     <div class="note-list">
         <ul>
-            <li v-for="(item,index) in noteList" :key="index" @click="noteDetail">
+            <li v-for="(item,index) in noteList" :key="index" @click="noteDetail(item.id)">
                 <div class="img">
                     <img :src="item.head_img" alt="">
                 </div>
@@ -23,8 +23,8 @@
             this.initNoteClass();
         },
         methods:{
-            noteDetail(){
-                this.$router.push({path:"/noteDetail"});
+            noteDetail(id){
+                this.$router.push({path:"/noteDetail",query:{id:id}});
             },
             initNoteClass(){
                 let note_type = this.$route.query.title;

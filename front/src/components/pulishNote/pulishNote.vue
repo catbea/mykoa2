@@ -121,6 +121,9 @@ export default {
     },
     publish(){
       let curUserId = JSON.parse(sessionStorage.getItem("userInfo")).id;
+      let nickname = JSON.parse(sessionStorage.getItem("userInfo")).nickname;
+      console.log("nickname="+nickname);
+      
       this.$http({
         method:'post',
         url:this.$util.baseUrl+'users/insertNote',
@@ -129,7 +132,8 @@ export default {
           head_img:this.preImg,
           title:this.title,
           note_type:this.selectCon,
-          userId:curUserId
+          userId:curUserId,
+          nickname:nickname
         }
       }).then((res) => {        
         if(res.data.code === "800000"){

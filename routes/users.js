@@ -175,7 +175,8 @@ router.post('/insertNote', async(ctx, next) =>{
     let title = ctx.request.body.title
     let note_type = ctx.request.body.note_type
     let userId = ctx.request.body.userId
-    await userService.insertNote([c_time,m_time,note_content,head_img,title,note_type,userId]).then(async (res)=>{
+    let nickname = ctx.request.body.nickname
+    await userService.insertNote([c_time,m_time,note_content,head_img,title,note_type,userId,nickname]).then(async (res)=>{
         let r = '';
         if (res.affectedRows != 0) {
             r = 'ok';
@@ -231,5 +232,33 @@ router.post('/findNoteListByType', async(ctx, next) =>{
     });
 
 })
+//* 根据分类名查找对应的笔记列表
+router.post('/findNoteDetailById', async(ctx, next) =>{    
+    let id = ctx.request.body.id
+    await userService.findNoteDetailById(id).then(async (res)=>{
+        let r = '';       
+        if (res.length) {
+            r = 'ok';
+            ctx.body = {
+                code:"800000",
+                data: res[0],
+                mess:"查找成功"
+            }   
+        }else{
+            r = 'error';
+            ctx.body = {
+                code:"800004",
+                data: r,
+                mess:"查找失败"
+            }  
+        }
+        
+    }).catch((err)=>{
+        ctx.body = {
+            code:"800002",
+            data: err
+          }
+    });
 
+})
 module.exports = router

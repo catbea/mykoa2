@@ -19,23 +19,23 @@ export default {
         bannerList: [
             {
             img: require("../../assets/img/raw_1512446076.jpeg"),
-            title: "做最好的咖啡",
-            content: "2017 年 50+ 最好的咖啡和咖啡机评测"
+            title: "半亩方田",
+            content: "足以记录最美好的时光"
             },
             {
             img: require("../../assets/img/raw_1512446089.jpeg"),
-            title: "负担的起的沙滩圣地",
-            content: "给我一个沙滩和吊床，我很高兴"
+            title: "一指流沙",
+            content: "足以消散所有的烦恼"
             },
             {
             img: require("../../assets/img/raw_1512446063.jpeg"),
-            title: "美丽的疯狂",
-            content: "2017 年 50+ 最好的咖啡和咖啡机评测"
+            title: "一支画笔",
+            content: "足以描绘最好的自己"
             },
             {
             img: require("../../assets/img/raw_1512446113.jpeg"),
-            title: "做最好的咖啡",
-            content: "2017 年 50+ 最好的咖啡和咖啡机评测"
+            title: "一辆小车",
+            content: "足以在全世界留下我们的足迹"
             }
         ]
     };
@@ -43,9 +43,12 @@ export default {
   methods: {
     onChange(index) {
       this.current = index;
-      console.log(this.current); 
+      console.log(this.current);       
       if(index===3){
-          this.StarLogin()
+          let t = setTimeout(()=>{
+              this.StarLogin()
+              clearTimeout(t)
+          },500)
       }     
     },
     StarLogin(){

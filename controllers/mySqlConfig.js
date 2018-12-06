@@ -65,7 +65,7 @@ let userLogin = function (username,userpwd){
     let userId = ctx.request.body.curUserId
  */
 let insertNote = function(options){
-    let _sql = `insert into note set c_time=?,m_time=?,note_content=?,head_img=?,title=?,note_type=?,useId=?;`
+    let _sql = `insert into note set c_time=?,m_time=?,note_content=?,head_img=?,title=?,note_type=?,useId=?,nickname=?;`
     return allServices.query(_sql,options); 
 }
 /**
@@ -76,9 +76,9 @@ let findNoteListByType = function (note_type){
     return allServices.query(_sql);
 }
 /**
- * 根据分类名查找对应的笔记列表
+ * 根据笔记列表的id查找笔记详情
  */
-let findNoteById = function (Id){
+let findNoteDetailById = function (Id){
     let _sql = `select * from note where id="${Id}";`
     return allServices.query(_sql);
 }
@@ -87,5 +87,6 @@ module.exports = {
     findUser,
     userLogin,
     insertNote,
-    findNoteListByType
+    findNoteListByType,
+    findNoteDetailById
 }
