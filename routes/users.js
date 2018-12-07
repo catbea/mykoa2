@@ -63,13 +63,14 @@ router.post('/add', async(ctx, next) => {
           }
       })
 })
-//星辰笔记start
+//星辰笔记start -login
 router.post('/userLogin', async(ctx, next) =>{
     var _username = ctx.request.body.username;
     var _userpwd = ctx.request.body.userpwd;
 
     await userService.userLogin(_username,_userpwd).then((res) => {
         let r = '';
+        console.log(res);
         if (res.length) {
             r = 'ok';
             let result = {
